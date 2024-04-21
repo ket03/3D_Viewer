@@ -1,7 +1,6 @@
 #include "glwidget.h"
 
-// ortho - начальное отображение
-// корректное соединение вершин
+// некорректное соединение вершин - скорее всего дело в неправильном парсере facets
 
 GLWidget::GLWidget(QWidget *parent) : QOpenGLWidget(parent) {}
 
@@ -20,11 +19,11 @@ void GLWidget::paintGL() {
   glRotatef(rotate_mouse_x, 1, 0, 0);
   glRotatef(rotate_mouse_y, 0, 1, 0);
 
-  glOrtho(-100, 100, -100, 100, 1000, -1000);
+  glOrtho(-data.max, data.max, -data.max, data.max, -data.max * 1.5, data.max * 1.5);
 
-  glEnableClientState(GL_VERTEX_ARRAY);
   glVertexPointer(3, GL_DOUBLE, 0, data.vertexes.data());
-  glDrawElements(GL_LINES, data.facets.size() / 3, GL_UNSIGNED_INT, data.facets.data());
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glDrawElements(GL_LINES, data.facets.size(), GL_UNSIGNED_INT, data.facets.data());
   glDisableClientState(GL_VERTEX_ARRAY);
 }
 

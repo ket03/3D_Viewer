@@ -14,12 +14,9 @@ void MainWindow::OpenObj() {
       QFileDialog::getOpenFileName(this, "Choose .obj file", "", tr("*.obj"));
   if (filename.size()) {
       Parser(filename.toStdString(), &ui->widget->data);
-      qDebug() << ui->widget->data.min_x << "\n";
-      qDebug() << ui->widget->data.max_x << "\n";
-      qDebug() << ui->widget->data.min_y << "\n";
-      qDebug() << ui->widget->data.max_y << "\n";
-      qDebug() << ui->widget->data.min_z << "\n";
-      qDebug() << ui->widget->data.max_z << "\n";
+      ui->lines_info->setText("");
+      ui->vertices_info->setText("vertexes: " + QString::number(ui->widget->data.vertexes.size()));
+      ui->lines_info->setText("lines: " + QString::number(ui->widget->data.facets.size()));
   }
 
 }

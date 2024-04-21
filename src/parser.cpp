@@ -27,21 +27,9 @@ void Parser(std::string filename, Data *data) {
         std::string number =
             (pos != std::string::npos) ? token.substr(0, pos) : token;
         data->vertexes.push_back(std::stod(number));
-    }
-
-      if (data->vertexes[data->vertexes.size()-3] > data->max_x)
-          data->max_x = data->vertexes[data->vertexes.size()-3];
-      if (data->vertexes[data->vertexes.size()-2] > data->max_y)
-          data->max_y = data->vertexes[data->vertexes.size()-2];
-      if (data->vertexes[data->vertexes.size()-1] > data->max_z)
-          data->max_z = data->vertexes[data->vertexes.size()-1];
-      if (data->vertexes[data->vertexes.size()-3] < data->min_x)
-          data->min_x = data->vertexes[data->vertexes.size()-3];
-      if (data->vertexes[data->vertexes.size()-2] < data->min_y)
-          data->min_y = data->vertexes[data->vertexes.size()-2];
-      if (data->vertexes[data->vertexes.size()-1] < data->min_z)
-          data->min_z = data->vertexes[data->vertexes.size()-1];
+      }
     }
   }
+  data->max = *std::max_element(data->vertexes.begin(), data->vertexes.end()) * 2.5;
   file.close();
 }
